@@ -27,4 +27,6 @@ public interface EmployeeMapper {
      * @return
      */
     Page<Employee> queryPage(Employee employee);
+
+    void update(Employee employee);
 }

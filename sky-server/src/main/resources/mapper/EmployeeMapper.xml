@@ -9,7 +9,7 @@
         <result column="password" property="password"/>
         <result column="phone" property="phone"/>
         <result column="sex" property="sex"/>
-        <result column="idNumber" property="idNumber"/>
+        <result column="id_number" property="idNumber"/>
         <result column="status" property="status"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
@@ -38,4 +38,19 @@
         order by create_time desc
     </select>
 
+    <update id="update" parameterType="com.sky.entity.Employee">
+        update employee
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            update_time = now(),
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

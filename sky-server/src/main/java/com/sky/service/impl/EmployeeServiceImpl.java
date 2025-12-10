@@ -104,4 +104,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
     }
 
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .id(id)
+                .status(status)
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+
+        employeeMapper.update(employee);
+    }
+
 }
