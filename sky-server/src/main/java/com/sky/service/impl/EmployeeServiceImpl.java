@@ -76,8 +76,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .idNumber(employeeDTO.getIdNumber())
                 .sex(employeeDTO.getSex())
                 .phone(employeeDTO.getPhone())
-                .createUser(BaseContext.getCurrentId())
-                .updateUser(BaseContext.getCurrentId())
                 .build();
 
         // 设置默认密码, 并加密
@@ -131,7 +129,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .idNumber(employeeDTO.getIdNumber())
                 .sex(employeeDTO.getSex())
                 .phone(employeeDTO.getPhone())
-                .updateUser(BaseContext.getCurrentId())
                 .build();
 
         employeeMapper.update(employee);

@@ -23,6 +23,10 @@
         order by sort asc , create_time desc
     </select>
 
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from employee where id = #{id}
+    </delete>
+
     <update id="update" parameterType="Category">
         update category
         <set>
