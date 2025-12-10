@@ -28,5 +28,16 @@ public interface EmployeeMapper {
      */
     Page<Employee> queryPage(Employee employee);
 
+    /**
+     * 更新员工数据
+     * @param employee
+     */
     void update(Employee employee);
+
+    /**
+     * 根据id查询员工数据
+     * @param id
+     * @return
+     */
+    Employee getById(Long id);
 }

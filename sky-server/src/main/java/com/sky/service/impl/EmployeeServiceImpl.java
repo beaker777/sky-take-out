@@ -76,14 +76,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .idNumber(employeeDTO.getIdNumber())
                 .sex(employeeDTO.getSex())
                 .phone(employeeDTO.getPhone())
+                .createUser(BaseContext.getCurrentId())
+                .updateUser(BaseContext.getCurrentId())
                 .build();
 
         // 设置默认密码, 并加密
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-
-        // 设置当前记录创建和修改人id
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
 
         // 插入数据库
         employeeMapper.insert(employee);
@@ -109,6 +107,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        // 避免密码泄露
+        employee.setPassword(PasswordConstant.NO_PASSWORD);
+
+        return employee;
+    }
+
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = Employee.builder()
+                .id(employeeDTO.getId())
+                .name(employeeDTO.getName())
+                .username(employeeDTO.getUsername())
+                .idNumber(employeeDTO.getIdNumber())
+                .sex(employeeDTO.getSex())
+                .phone(employeeDTO.getPhone())
                 .updateUser(BaseContext.getCurrentId())
                 .build();
 
