@@ -16,6 +16,10 @@
         <result column="create_user" property="createUser"/>
         <result column="update_user" property="updateUser"/>
     </resultMap>
+    
+    <select id="getByUsername" parameterType="java.lang.String" resultMap="dataMap">
+        select * from employee where username = #{username}
+    </select>
 
     <insert id="insert" parameterType="com.sky.entity.Employee">
         insert into employee
@@ -23,5 +27,15 @@
         values
             (#{id}, #{username}, #{name}, #{password}, #{phone}, #{sex}, #{idNumber}, now(), now(), #{createUser}, #{updateUser})
     </insert>
+
+    <select id="queryPage" parameterType="com.sky.entity.Employee" resultMap="dataMap">
+        select * from employee
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -12,7 +13,6 @@ public interface EmployeeMapper {
      * @param username
      * @return
      */
-    @Select("select * from employee where username = #{username}")
     Employee getByUsername(String username);
 
     /**
@@ -20,4 +20,11 @@ public interface EmployeeMapper {
      * @param employee
      */
     void insert(Employee employee);
+
+    /**
+     * 员工分页查询
+     * @param employee
+     * @return
+     */
+    Page<Employee> queryPage(Employee employee);
 }
