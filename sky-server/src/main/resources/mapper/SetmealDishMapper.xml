@@ -14,4 +14,8 @@
             (#{setmealId}, #{dishId}, #{name}, #{price}, #{copies})
     </insert>
 
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from setmeal_dish where setmeal_id = #{id}
+    </delete>
+
 </mapper>
