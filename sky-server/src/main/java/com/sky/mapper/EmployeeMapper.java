@@ -2,6 +2,7 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,7 +30,7 @@ public interface EmployeeMapper {
      * @param employee
      * @return
      */
-    Page<Employee> queryPage(Employee employee);
+    Page<Employee> queryPage(EmployeePageQueryDTO employee);
 
     /**
      * 更新员工数据

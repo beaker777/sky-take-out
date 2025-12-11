@@ -28,7 +28,7 @@
             (#{id}, #{username}, #{name}, #{password}, #{phone}, #{sex}, #{idNumber}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
 
-    <select id="queryPage" parameterType="com.sky.entity.Employee" resultMap="dataMap">
+    <select id="queryPage" parameterType="com.sky.dto.EmployeePageQueryDTO" resultMap="dataMap">
         select * from employee
         <where>
             <if test="name != null and name != ''">

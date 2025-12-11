@@ -87,11 +87,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public PageResult queryPage(EmployeePageQueryDTO employeePageQueryDTO) {
-        Employee employee = Employee.builder().name(employeePageQueryDTO.getName()).build();
-
         // 进行分页查询
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
-        Page<Employee> page = employeeMapper.queryPage(employee);
+        Page<Employee> page = employeeMapper.queryPage(employeePageQueryDTO);
 
         // 封装对象, 返回
         return PageResult.builder()
