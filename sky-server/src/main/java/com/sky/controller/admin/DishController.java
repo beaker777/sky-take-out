@@ -124,4 +124,14 @@ public class DishController {
 
         return Result.success(dishes);
     }
+
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用或禁用菜品")
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("启用或禁用菜品: {}, {}", status, id);
+
+        dishService.startOrStop(status, id);
+
+        return Result.success();
+    }
 }
