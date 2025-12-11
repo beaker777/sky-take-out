@@ -6,6 +6,8 @@ import com.sky.enumeration.OperationType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Author beaker
  * @Date 2025/12/11 16:39
@@ -32,4 +34,11 @@ public interface SetmealDishMapper {
      * @param id
      */
     void delete(Long id);
+
+    /**
+     * 根据套餐id获取菜品
+     * @param id
+     * @return
+     */
+    List<SetmealDish> getBySetmealId(Long id);
 }
