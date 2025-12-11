@@ -9,4 +9,8 @@
         values
             (#{dishId}, #{name}, #{value})
     </insert>
+
+    <delete id="deleteByDishId" parameterType="java.lang.Long">
+        delete from dish_flavor where dish_id = #{id}
+    </delete>
 </mapper>

@@ -31,5 +31,12 @@
         order by d.create_time desc
     </select>
 
+    <select id="getById" parameterType="java.lang.Long" resultType="com.sky.entity.Dish">
+        select * from dish where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from dish where id = #{id}
+    </delete>
 
 </mapper>

@@ -4,6 +4,8 @@ import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.result.PageResult;
 
+import java.util.List;
+
 /**
  * @Author beaker
  * @Date 2025/12/11 14:00
@@ -23,4 +25,10 @@ public interface DishService {
      * @return
      */
     PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 删除菜品
+     * @param ids
+     */
+    void delete(List<Long> ids);
 }
