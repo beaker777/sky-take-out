@@ -15,10 +15,12 @@ import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,6 +86,11 @@ public class DishServiceImpl implements DishService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
+    /**
+     * 删除菜品
+     *
+     * @param ids
+     */
     @Override
     @Transactional
     public void delete(List<Long> ids) {
@@ -109,5 +116,65 @@ public class DishServiceImpl implements DishService {
             // 删除菜品关联的口味
             dishFlavorMapper.deleteByDishId(id);
         }
+    }
+
+    /**
+     * 根据id查询菜品
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public DishVO getById(Long id) {
+        // 获取菜品数据
+        Dish dish = dishMapper.getById(id);
+
+        // 获取口味数据
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
+
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(dishFlavors);
+        return dishVO;
+    }
+
+    /**
+     * 更新菜品
+     *
+     * @param dishDTO
+     */
+    @Override
+    public void update(DishDTO dishDTO) {
+        Dish dish = Dish.builder()
+                .id(dishDTO.getId())
+                .categoryId(dishDTO.getCategoryId())
+                .description(dishDTO.getDescription())
+                .image(dishDTO.getImage())
+                .name(dishDTO.getName())
+                .price(dishDTO.getPrice())
+                .status(dishDTO.getStatus())
+                .build();
+        dishMapper.update(dish);
+
+        // 删除原本口味数据
+        dishFlavorMapper.deleteByDishId(dishDTO.getId());
+
+        // 重新插入口味数据
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        for (DishFlavor flavor : flavors) {
+            flavor.setDishId(dishDTO.getId());
+            dishFlavorMapper.insert(flavor);
+        }
+    }
+
+    /**
+     * 根据分类查询菜品
+     *
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> list(Integer categoryId) {
+        return dishMapper.list(categoryId);
     }
 }

@@ -3,6 +3,8 @@ package com.sky.mapper;
 import com.sky.entity.DishFlavor;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Author beaker
  * @Date 2025/12/11 14:21
@@ -22,4 +24,11 @@ public interface DishFlavorMapper {
      * @param id
      */
     void deleteByDishId(Long id);
+
+    /**
+     * 根据dishId获取口味数据
+     * @param id
+     * @return
+     */
+    List<DishFlavor> getByDishId(Long id);
 }

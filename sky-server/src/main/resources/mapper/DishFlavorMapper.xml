@@ -13,4 +13,8 @@
     <delete id="deleteByDishId" parameterType="java.lang.Long">
         delete from dish_flavor where dish_id = #{id}
     </delete>
+
+    <select id="getByDishId" parameterType="java.lang.Long" resultType="com.sky.entity.DishFlavor">
+        select * from dish_flavor where dish_id = #{id}
+    </select>
 </mapper>

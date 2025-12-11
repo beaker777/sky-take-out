@@ -1,5 +1,8 @@
 package com.sky.mapper;
 
+import com.sky.annotation.AutoFill;
+import com.sky.entity.SetmealDish;
+import com.sky.enumeration.OperationType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,4 +20,10 @@ public interface SetmealDishMapper {
      * @return
      */
     Long getSetmealIdByDishId(Long id);
+
+    /**
+     * 新增套餐菜品
+     * @param setmealDish
+     */
+    void insert(SetmealDish setmealDish);
 }
