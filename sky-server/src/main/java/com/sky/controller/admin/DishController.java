@@ -1,5 +1,6 @@
 package com.sky.controller.admin;
 
+import com.sky.constant.RedisConstant;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
@@ -11,9 +12,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author beaker
@@ -27,7 +30,10 @@ import java.util.List;
 public class DishController {
 
     @Autowired
-    DishService dishService;
+    private DishService dishService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 新增菜品
@@ -41,6 +47,9 @@ public class DishController {
         log.info("新增菜品: {}", dishDTO);
 
         dishService.saveWithFlavor(dishDTO);
+
+        // 新增菜品后修改缓存数据
+        redisTemplate.delete(RedisConstant.DISH + dishDTO.getCategoryId());
 
         return Result.success();
     }
@@ -74,6 +83,10 @@ public class DishController {
 
         dishService.delete(ids);
 
+        // 清空缓存
+        Set keys = redisTemplate.keys(RedisConstant.DISH + "*");
+        redisTemplate.delete(keys);
+
         return Result.success();
     }
 
@@ -106,6 +119,10 @@ public class DishController {
 
         dishService.update(dishDTO);
 
+        // 清空缓存
+        Set keys = redisTemplate.keys(RedisConstant.DISH + "*");
+        redisTemplate.delete(keys);
+
         return Result.success();
     }
 
@@ -132,6 +149,12 @@ public class DishController {
 
         dishService.startOrStop(status, id);
 
+        // 清空缓存
+        Set keys = redisTemplate.keys(RedisConstant.DISH + "*");
+        redisTemplate.delete(keys);
+
         return Result.success();
     }
+
+    
 }
