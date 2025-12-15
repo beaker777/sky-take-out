@@ -18,9 +18,9 @@ import com.sky.vo.SetmealVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +43,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param setmealDTO
      */
     @Override
+    @CacheEvict(cacheNames = "setmealCache", key = "setmealDTO.categoryId")
     public void save(SetmealDTO setmealDTO) {
         // 插入套餐
         Setmeal setmeal = Setmeal.builder()
@@ -89,6 +90,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param ids
      */
     @Override
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public void delete(List<Long> ids) {
         for (Long id : ids) {
             Setmeal setmeal = setmealMapper.getById(id);
@@ -132,6 +134,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param setmealDTO
      */
     @Override
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public void update(SetmealDTO setmealDTO) {
         Setmeal setmeal = Setmeal.builder()
                 .id(setmealDTO.getId())
@@ -160,6 +163,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param status
      */
     @Override
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public void startOrStop(Integer status, Long id) {
         Setmeal setmeal = Setmeal.builder()
                 .status(status)
