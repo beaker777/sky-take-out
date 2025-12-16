@@ -14,4 +14,8 @@
             (#{id}, #{openid}, #{name}, #{phone}, #{sex}, #{idNumber}, #{avatar}, now())
     </insert>
 
+    <select id="getById" parameterType="java.lang.Long" resultType="com.sky.entity.User">
+        select * from user where id = #{userId}
+    </select>
+
 </mapper>
