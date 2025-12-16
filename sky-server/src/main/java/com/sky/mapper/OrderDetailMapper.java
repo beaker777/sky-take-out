@@ -3,6 +3,8 @@ package com.sky.mapper;
 import com.sky.entity.OrderDetail;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Author beaker
  * @Date 2025/12/16 15:47
@@ -16,4 +18,11 @@ public interface OrderDetailMapper {
      * @param orderDetail
      */
     void insert(OrderDetail orderDetail);
+
+    /**
+     * 根据 orderId 查询订单细节
+     * @param id
+     * @return
+     */
+    List<OrderDetail> getByOrderId(Long id);
 }

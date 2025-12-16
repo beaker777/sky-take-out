@@ -10,4 +10,8 @@
             (#{name}, #{image}, #{orderId}, #{dishId}, #{setmealId}, #{dishFlavor}, #{number}, #{amount})
     </insert>
 
+    <select id="getByOrderId" parameterType="java.lang.Long" resultType="com.sky.entity.OrderDetail">
+        select * from order_detail where order_id = #{id}
+    </select>
+
 </mapper>

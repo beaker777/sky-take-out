@@ -33,4 +33,18 @@
         where id = #{id}
     </update>
 
+    <select id="pageQuery" parameterType="com.sky.dto.OrdersPageQueryDTO" resultType="com.sky.entity.Orders">
+        select * from orders
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by order_time desc
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.sky.entity.Orders">
+        select * from orders where id = #{id}
+    </select>
+
 </mapper>
