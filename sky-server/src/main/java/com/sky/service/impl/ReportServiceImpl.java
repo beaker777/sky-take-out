@@ -101,8 +101,8 @@ public class ReportServiceImpl implements ReportService {
             map.put("begin", beginTime);
             map.put("end", endTime);
 
-            Integer newUser = userMapper.sumNewUser(map);
-            Integer totalUser = userMapper.sumTotalUser(map);
+            Integer newUser = userMapper.countNewUser(map);
+            Integer totalUser = userMapper.countTotalUser(map);
 
             if (newUser == null) newUser = 0;
             if (totalUser == null) totalUser = 0;

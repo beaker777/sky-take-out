@@ -38,12 +38,12 @@ public interface UserMapper {
      * @param map
      * @return
      */
-    Integer sumNewUser(Map<String, Object> map);
+    Integer countNewUser(Map<String, Object> map);
 
     /**
      * 查询总用户数量
      * @param map
      * @return
      */
-    Integer sumTotalUser(Map<String, Object> map);
+    Integer countTotalUser(Map<String, Object> map);
 }
