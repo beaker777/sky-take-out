@@ -3,6 +3,8 @@ package com.sky.mapper;
 import com.sky.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 /**
  * @Author beaker
  * @Date 2025/12/12 20:16
@@ -30,4 +32,18 @@ public interface UserMapper {
      * @return
      */
     User getById(Long userId);
+
+    /**
+     * 查询新增用户数量
+     * @param map
+     * @return
+     */
+    Integer sumNewUser(Map<String, Object> map);
+
+    /**
+     * 查询总用户数量
+     * @param map
+     * @return
+     */
+    Integer sumTotalUser(Map<String, Object> map);
 }

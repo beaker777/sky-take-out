@@ -1,11 +1,15 @@
 package com.sky.mapper;
 
 import com.github.pagehelper.Page;
+import com.sky.dto.GoodsSalesDTO;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author beaker
@@ -59,4 +63,33 @@ public interface OrderMapper {
      * @return
      */
     List<Orders> getByStatusAndOrderTime(Orders orders);
+
+    /**
+     * 根据时间查询营业额
+     * @param map
+     * @return
+     */
+    Double sumByTime(Map<String, Object> map);
+
+    /**
+     * 查询订单数
+     * @param map
+     * @return
+     */
+    Integer countOrder(Map<String, Object> map);
+
+    /**
+     * 查询有效订单数
+     * @param map
+     * @return
+     */
+    Integer countValidOrder(Map<String, Object> map);
+
+    /**
+     * 查询排名前10的商品
+     * @param begin
+     * @param end
+     * @return
+     */
+    List<GoodsSalesDTO> getTop10(LocalDateTime begin, LocalDateTime end);
 }
