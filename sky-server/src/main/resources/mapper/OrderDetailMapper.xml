@@ -14,4 +14,8 @@
         select * from order_detail where order_id = #{id}
     </select>
 
+    <delete id="deleteByOrderId" parameterType="java.lang.Long">
+        delete from order_detail where order_id = #{id}
+    </delete>
+
 </mapper>

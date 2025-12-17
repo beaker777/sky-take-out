@@ -25,4 +25,10 @@ public interface OrderDetailMapper {
      * @return
      */
     List<OrderDetail> getByOrderId(Long id);
+
+    /**
+     * 根据 orderId 删除订单细节
+     * @param id
+     */
+    void deleteByOrderId(Long id);
 }

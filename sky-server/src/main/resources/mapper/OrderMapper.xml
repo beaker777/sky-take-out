@@ -36,6 +36,18 @@
     <select id="pageQuery" parameterType="com.sky.dto.OrdersPageQueryDTO" resultType="com.sky.entity.Orders">
         select * from orders
         <where>
+            <if test="beginTime != null">
+                and begin_time = #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime}
+            </if>
+            <if test="number != null">
+                and number = #{number}
+            </if>
+            <if test="phone != null">
+                and phone = #{phone}
+            </if>
             <if test="status != null">
                 and status = #{status}
             </if>
@@ -45,6 +57,10 @@
 
     <select id="getById" parameterType="java.lang.Long" resultType="com.sky.entity.Orders">
         select * from orders where id = #{id}
+    </select>
+
+    <select id="countByStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id) from orders where status = #{status}
     </select>
 
 </mapper>
