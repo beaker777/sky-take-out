@@ -5,6 +5,8 @@ import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Author beaker
  * @Date 2025/12/16 15:43
@@ -51,4 +53,10 @@ public interface OrderMapper {
      */
     Integer countByStatus(Integer status);
 
+    /**
+     * 根据状态和时间查询订单
+     * @param orders
+     * @return
+     */
+    List<Orders> getByStatusAndOrderTime(Orders orders);
 }
